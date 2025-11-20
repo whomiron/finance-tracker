@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { margin-top: 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table th, table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background: #e9eef3;
+            text-align: left;
+        }
+        form > div { margin: 12px 0; }
+        input, select, button {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #bbb;
+            width: 100%;
+            max-width: 350px;
+        }
+        button {
+            background: #556ee6;
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+        }
+        a {
+            color: #556ee6;
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Личный кабинет</h1>
+
+<div class="card">
+    <h2>Бюджет</h2>
+    <p th:text="'Период: ' + ${period}"></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Категория</th><th>Лимит</th><th>Потрачено</th><th>Остаток</th><th>Прогноз</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${budgets}">
+            <td th:text="${s.category}"></td>
+            <td th:text="${s.limitAmount}"></td>
+            <td th:text="${s.spentAmount}"></td>
+            <td th:text="${s.remainingAmount}"></td>
+            <td th:text="${s.forecastedEndOfMonth}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><a th:href="@{'/' + ${userId} + '/budgets/summary'}">Подробнее</a></p>
+</div>
+
+<div class="card" th:if="${recommendations}">
+    <h2>Рекомендации</h2>
+
+    <h3>Главное</h3>
+    <ul><li th:each="r : ${recommendations.highlights}" th:text="${r}"></li></ul>
+
+    <h3>Что делать</h3>
+    <ul><li th:each="a : ${recommendations.actions}" th:text="${a}"></li></ul>
+
+</div>
+
+<div class="card">
+    <h2>Быстрый доступ</h2>
+    <ul>
+        <li><a th:href="@{'/' + ${userId} + '/transactions'}">Транзакции</a></li>
+        <li><a th:href="@{'/' + ${userId} + '/goals'}">Финансовые цели</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

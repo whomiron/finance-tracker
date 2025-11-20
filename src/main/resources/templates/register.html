@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Регистрация</title>
+
+  <style>
+    body {
+      max-width: 420px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+    h2 { text-align: center; margin-top: 0; }
+    form div { margin: 15px 0; }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #bbb;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #556ee6;
+      color: white;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    a { color: #556ee6; }
+    .msg-error { color: #c0392b; margin-top: 10px; }
+  </style>
+
+</head>
+<body>
+
+<div class="card">
+  <h2>Регистрация</h2>
+
+  <form th:action="@{/register}" th:object="${form}" method="post">
+
+    <div>
+      <label>Логин</label>
+      <input type="text" th:field="*{username}" required>
+    </div>
+
+    <div>
+      <label>Пароль</label>
+      <input type="password" th:field="*{password}" required>
+    </div>
+
+    <div>
+      <label>Отображаемое имя</label>
+      <input type="text" th:field="*{displayName}">
+    </div>
+
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+
+  <p style="text-align:center; margin-top:15px;">
+    Уже есть аккаунт? <a th:href="@{/login}">Войти</a>
+  </p>
+
+  <p th:if="${error}" th:text="${error}" class="msg-error"></p>
+</div>
+
+</body>
+</html>

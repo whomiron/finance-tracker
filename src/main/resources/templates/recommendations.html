@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Рекомендации</title>
+
+  <style>
+    body {
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { margin-top: 0; }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    ul { margin-left: 20px; }
+    a {
+      color: #556ee6;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+
+<body>
+
+<h1>Рекомендации</h1>
+
+<div class="card">
+  <h2>Highlights</h2>
+  <ul>
+    <li th:each="h : ${recommendations.highlights}" th:text="${h}"></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Действия</h2>
+  <ul>
+    <li th:each="a : ${recommendations.actions}" th:text="${a}"></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Вопросы</h2>
+  <ul>
+    <li th:each="q : ${recommendations.questionsToConsider}" th:text="${q}"></li>
+  </ul>
+</div>
+
+<p><a th:href="@{'/' + ${userId} + '/dashboard'}">Назад</a></p>
+
+</body>
+</html>

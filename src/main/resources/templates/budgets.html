@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сводка бюджета</title>
+
+    <style>
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 { margin-top: 0; }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table th, table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background: #e9eef3;
+            text-align: left;
+        }
+        a {
+            color: #556ee6;
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+<h1>Бюджет</h1>
+
+<div class="card">
+    <table>
+        <thead>
+        <tr>
+            <th>Категория</th>
+            <th>Лимит</th>
+            <th>Потрачено</th>
+            <th>Остаток</th>
+            <th>Прогноз</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${summaries}">
+            <td th:text="${s.category}"></td>
+            <td th:text="${s.limitAmount}"></td>
+            <td th:text="${s.spentAmount}"></td>
+            <td th:text="${s.remainingAmount}"></td>
+            <td th:text="${s.forecastedEndOfMonth}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<p><a th:href="@{'/' + ${userId} + '/dashboard'}">Назад</a></p>
+
+</body>
+</html>
