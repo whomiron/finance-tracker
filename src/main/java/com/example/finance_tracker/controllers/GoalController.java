@@ -1,4 +1,3 @@
-// src/main/java/com/example/finance_tracker/controllers/GoalController.java
 package com.example.finance_tracker.controllers;
 
 import com.example.finance_tracker.forms.GoalForm;

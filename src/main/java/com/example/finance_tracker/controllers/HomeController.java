@@ -13,12 +13,11 @@ public class HomeController {
     public String root() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !(auth.getPrincipal() instanceof UserDetailsImpl)) {
-            // not authenticated -> login
             return "redirect:/login";
         }
+
         UserDetailsImpl ud = (UserDetailsImpl) auth.getPrincipal();
         Long userId = ud.getUserAccount().getProfile().getId();
-        // redirect to user's dashboard
         return "redirect:/" + userId + "/dashboard";
     }
 }
